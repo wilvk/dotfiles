@@ -12,3 +12,14 @@ find ~ -maxdepth 1 -type file -name ".*"|sort
 cp ~/\.* .
 ```
 
+# Notes:
+
+When using, replace `<REPLACE_EMAIL>` with my actual email address.
+
+# Copying to home path:
+
+run:
+
+```
+./copy_dotfiles.sh
+```
