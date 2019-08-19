@@ -33,6 +33,7 @@ call vundle#begin()                         " start vundle environment
   Plugin 'file:///Users/willvk/.vim/bundle/vgdb' " vgdb testing
   Plugin 'kchmck/vim-coffee-script'          " coffeescript support
   Plugin 'pangloss/vim-javascript'           " js formatting
+  Plugin 'will133/vim-dirdiff'               " directory diff :Dirdiff
 call vundle#end()                           " end of vundle environment
 
 filetype plugin indent on
