@@ -105,3 +105,6 @@ source ~/.bash_profile
 source $ZSH/oh-my-zsh.sh
 
 export TIDE_CONFIG_LOCATION=/Users/willvk/Source/wilvk/vgdb/plugins/test_c-stdio/
+
+# re-bind for delete to start-of-line
+bindkey \^U backward-kill-line
