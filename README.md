@@ -33,4 +33,4 @@ run:
 |Forward one word|Alt-C|
 |Backward one word|Alt-B|
 |Delete to EOL|Ctrl-K|
-|Delete to BOL|Ctrl-A|
+|Delete to BOL|Ctrl-U|
