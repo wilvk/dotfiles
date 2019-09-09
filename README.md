@@ -26,8 +26,8 @@ run:
 
 ## Key combos (from https://www.tecmint.com/linux-command-line-bash-shortcut-keys/)
 
-|:--:|:--:|
 |Action|Command|
+|------|-------|
 |BOL|Ctrl-A|
 |EOL|Ctrl-E|
 |Forward one word|Alt-C|
