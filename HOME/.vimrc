@@ -3,11 +3,11 @@
 " Overview:
 "
 " I have layed out this file with the following sections:
-" - set statements
-" - plugins
-" - variable and highlight declarations
-" - keyboard mappings
-" - commands
+" - set vim variables
+" - load plugins
+" - set variables and highlights
+" - set keyboard mappings
+" - define commands and actions
 "
 " Prerequisites:
 "
@@ -19,6 +19,8 @@
 "   macos: clone the icons repo and run ./install.sh Hack. Select the Hack
 "   Nerd font in iterm
 " dotnet - for dotnet development - https://dotnet.microsoft.com/download
+" fzf - echodocs will attempt to install this on first run
+" omnisharp-roslyn - omniisharp-vim will attempt to install this on first run
 "
 " Reasoning:
 "   I find it easier to manage the .vimrc file this way. It is also a logical
@@ -53,7 +55,8 @@ set nocindent
 set nohlsearch
 set pastetoggle=<F3>
 set completeopt=longest,menuone,preview
-set cmdheight=3
+set timeoutlen=500
+"set cmdheight=3
 set tags=tags
 filetype plugin indent off
 syntax off
@@ -67,23 +70,23 @@ call vundle#begin()
   Plugin 'mileszs/ack.vim'
   Plugin 'will133/vim-dirdiff'
   Plugin 'udalov/kotlin-vim'
-  Bundle 'nickspoons/vim-sharpenup'
-  Bundle 'dense-analysis/ale'
-  Bundle 'RRethy/vim-illuminate'
-  Bundle 'inside/vim-search-pulse'
-  Bundle 'OmniSharp/omnisharp-vim'
-  Bundle 'tpope/vim-dispatch'
-  Bundle 'prabirshrestha/asyncomplete.vim'
-  Bundle 'tpope/vim-sensible'
+  Plugin 'nickspoons/vim-sharpenup'
+  Plugin 'dense-analysis/ale'
+  Plugin 'RRethy/vim-illuminate'
+  Plugin 'inside/vim-search-pulse'
+  Plugin 'OmniSharp/omnisharp-vim'
+  Plugin 'tpope/vim-dispatch'
+  Plugin 'prabirshrestha/asyncomplete.vim'
+  Plugin 'tpope/vim-sensible'
   Plugin 'OrangeT/vim-csharp'
-  Bundle 'editorconfig/editorconfig-vim'
+  Plugin 'editorconfig/editorconfig-vim'
   Plugin 'tomasiser/vim-code-dark'
   Plugin 'Shougo/echodoc.vim'
   Plugin 'junegunn/fzf.vim'
   Plugin 'junegunn/fzf'
   Plugin 'ddrscott/vim-side-search'
   Plugin 'vim-scripts/taglist.vim'
-  Plugin 'MarcWeber/vim-addon-mw-utils'
+  Plugin 'MarcWeber/vim-addon-mw-utils.git'
   Plugin 'tomtom/tlib_vim'
   Plugin 'garbas/vim-snipmate'
   Plugin 'honza/vim-snippets'
@@ -93,10 +96,19 @@ call vundle#begin()
   Plugin 'tsony-tsonev/nerdtree-git-plugin'
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plugin 'airblade/vim-gitgutter'
+  Plugin 'liuchengxu/vim-which-key'
   Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 filetype plugin on
 syntax on
+colorscheme codedark
+highlight csUserMethod ctermfg=85
+highlight link EchoDocPopup Pmenu
+highlight ExtraWhitespace ctermbg=236
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+match ExtraWhitespace /\s\+$/
 let g:NERDTreeShowHidden=1
 let g:NERDTreeWinSize=30
 let NERDTreeMinimalUI = 1
@@ -135,8 +147,7 @@ let g:OmniSharp_highlight_groups = {
 \     'csUserType': ['enum name', 'namespace name'],
 \     'csGeneric': ['local name', 'parameter name'],
 \     'csStruct': ['struct name', 'class name'],
-\     'csType': ['keyword - control']
-\}
+\     'csType': ['keyword - control']}
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
 let g:echodoc_enable_at_startup = 1
@@ -144,51 +155,56 @@ let g:side_search_prg = "ag --word-regexp --ignore='*.js.map' --heading --stats 
 let g:side_search_splitter = 'new'
 let g:side_search_split_pct = 0.4
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:NERDTreeGitStatusNodeColorization = 1
 let g:NERDTreeGitStatusWithFlags = 1
+let g:NERDTreeGitStatusNodeColorization = 1
+let g:NERDTreeIndicatorMapCustom = {
+\     "Modified"  : "✹",
+\     "Staged"    : "✚",
+\     "Untracked" : "✭",
+\     "Renamed"   : "➜",
+\     "Unmerged"  : "═",
+\     "Deleted"   : "✖",
+\     "Dirty"     : "✗",
+\     "Clean"     : "✔︎",
+\     'Ignored'   : '☒',
+\     "Unknown"   : "?"}
 let g:NERDTreeColorMapCustom = {
 \     "Modified"  : ["#528AB3", "12", "NONE", "NONE"],
 \     "Staged"    : ["#538B54", "12", "NONE", "NONE"],
 \     "Untracked" : ["#BE5849", "1", "NONE", "NONE"],
 \     "Dirty"     : ["#299999", "6", "NONE", "NONE"],
 \     "Clean"     : ["#87939A", "7", "NONE", "NONE"],
-\     "Ignored"   : ["#808080", "5", "NONE", "NONE"]
-\ }
-colorscheme codedark
-highlight csUserMethod ctermfg=85
-highlight link EchoDocPopup Pmenu
-highlight ExtraWhitespace ctermbg=236
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=1
-match ExtraWhitespace /\s\+$/
+\     "Ignored"   : ["#808080", "5", "NONE", "NONE"]}
+let g:which_key_vertical=1
 map <leader>r :NERDTreeFind<cr>
-nnoremap <silent> <leader>d :bp\|bd #<CR>
-map <leader>t :set tabstop=2 shiftwidth=2 expandtab <CR> :retab <CR>
+map <leader>tab :set tabstop=2 shiftwidth=2 expandtab <CR> :retab <CR>
 nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
-"inoremap <expr> <Tab> pumvisible() ? '<C-n>' : getline('.')[col('.')-2] =~# '[[:alnum:].-_#$]' ? '<C-x><C-o>' : '<Tab>'
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 nnoremap <Leader>ofu :OmniSharpFixUsings<CR>
 nnoremap <Leader>ou :OmniSharpFindUsages<CR>
 nnoremap <Leader>od :OmniSharpGotoDefinition<CR>
+nnoremap <Leader>of :OmniSharpCodeFormat<CR>
 nnoremap <Leader>oi :OmniSharpFindImplementations<CR>
+nnoremap <Leader>dr :!dotnet restore && dotnet build && dotnet run<CR>
+nnoremap <Leader>db :!dotnet build<CR>
+nnoremap <Leader>dt :!dotnet restore && dotnet build && dotnet test<CR>
+nnoremap <Leader>de :!dotnet restore <CR>
 nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
 nnoremap <Leader>nm :OmniSharpRename<CR>
 nnoremap <F2> :OmniSharpRename<CR>
-nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
 nnoremap <Leader>sp :OmniSharpStopServer<CR>
-nnoremap <C-o><C-u> :OmniSharpFindUsages<CR>
-nnoremap <C-o><C-d> :OmniSharpGotoDefinition<CR>
 nnoremap <C-o><C-d><C-p> :OmniSharpPreviewDefinition<CR>
-nnoremap <C-o><C-r> :!dotnet run
+nnoremap <silent> <leader>      :<c-u>WhichKey '\'<CR>
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
 command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
+autocmd! FileType which_key
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 execute 'highlight csStruct cterm=bold ctermfg=' . synIDattr(hlID('Statement'),'fg')
 call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
         \ 'name': 'ultisnips',
