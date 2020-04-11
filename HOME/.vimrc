@@ -19,8 +19,6 @@
 "   macos: clone the icons repo and run ./install.sh Hack. Select the Hack
 "   Nerd font in iterm
 " dotnet - for dotnet development - https://dotnet.microsoft.com/download
-" fzf - echodocs will attempt to install this on first run
-" omnisharp-roslyn - omniisharp-vim will attempt to install this on first run
 "
 " Reasoning:
 "   I find it easier to manage the .vimrc file this way. It is also a logical
@@ -56,7 +54,7 @@ set nohlsearch
 set pastetoggle=<F3>
 set completeopt=longest,menuone,preview
 set timeoutlen=500
-"set cmdheight=3
+set noshowmode
 set tags=tags
 filetype plugin indent off
 syntax off
@@ -97,13 +95,15 @@ call vundle#begin()
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plugin 'airblade/vim-gitgutter'
   Plugin 'liuchengxu/vim-which-key'
+  Plugin 'bling/vim-bufferline'
+  Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 filetype plugin on
 syntax on
 colorscheme codedark
 highlight csUserMethod ctermfg=85
-highlight link EchoDocPopup Pmenu
+highlight link EchoDocPopup Visual
 highlight ExtraWhitespace ctermbg=236
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
@@ -150,7 +150,6 @@ let g:OmniSharp_highlight_groups = {
 \     'csType': ['keyword - control']}
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
-let g:echodoc_enable_at_startup = 1
 let g:side_search_prg = "ag --word-regexp --ignore='*.js.map' --heading --stats -B 2 -A 4"
 let g:side_search_splitter = 'new'
 let g:side_search_split_pct = 0.4
@@ -176,6 +175,8 @@ let g:NERDTreeColorMapCustom = {
 \     "Clean"     : ["#87939A", "7", "NONE", "NONE"],
 \     "Ignored"   : ["#808080", "5", "NONE", "NONE"]}
 let g:which_key_vertical=1
+let g:bufferline_rotate=1
+let g:bufferline_fixed_index=0
 map <leader>r :NERDTreeFind<cr>
 map <leader>tab :set tabstop=2 shiftwidth=2 expandtab <CR> :retab <CR>
 nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
@@ -191,6 +192,12 @@ nnoremap <Leader>dr :!dotnet restore && dotnet build && dotnet run<CR>
 nnoremap <Leader>db :!dotnet build<CR>
 nnoremap <Leader>dt :!dotnet restore && dotnet build && dotnet test<CR>
 nnoremap <Leader>de :!dotnet restore <CR>
+nnoremap <Leader>fo :Colors<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader>fh :History<CR>
+nnoremap <Leader>fc :Commits<CR>
+nnoremap <Leader>fa :Ag<CR>
 nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
 nnoremap <Leader>nm :OmniSharpRename<CR>
 nnoremap <F2> :OmniSharpRename<CR>
