@@ -56,6 +56,7 @@ set completeopt=longest,menuone,preview
 set timeoutlen=500
 set noshowmode
 set tags=tags
+set cmdheight=1
 filetype plugin indent off
 syntax off
 set rtp+=~/.vim/bundle/Vundle.vim
