@@ -33,6 +33,13 @@
 "  between variables, highlights, etc. that are harder to identify.
 "  Maybe one day I'll write a blog post about it.
 "
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 set number
 set nocompatible
 set backspace=indent,eol,start
@@ -57,50 +64,49 @@ set timeoutlen=500
 set noshowmode
 set tags=tags
 set cmdheight=1
-filetype plugin indent off
-syntax off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-  Plugin 'VundleVim/Vundle.vim'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'bling/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'mileszs/ack.vim'
-  Plugin 'will133/vim-dirdiff'
-  Plugin 'udalov/kotlin-vim'
-  Plugin 'nickspoons/vim-sharpenup'
-  Plugin 'dense-analysis/ale'
-  Plugin 'RRethy/vim-illuminate'
-  Plugin 'inside/vim-search-pulse'
-  Plugin 'OmniSharp/omnisharp-vim'
-  Plugin 'tpope/vim-dispatch'
-  Plugin 'prabirshrestha/asyncomplete.vim'
-  Plugin 'tpope/vim-sensible'
-  Plugin 'OrangeT/vim-csharp'
-  Plugin 'editorconfig/editorconfig-vim'
-  Plugin 'tomasiser/vim-code-dark'
-  Plugin 'Shougo/echodoc.vim'
-  Plugin 'junegunn/fzf.vim'
-  Plugin 'junegunn/fzf'
-  Plugin 'ddrscott/vim-side-search'
-  Plugin 'vim-scripts/taglist.vim'
-  Plugin 'MarcWeber/vim-addon-mw-utils.git'
-  Plugin 'tomtom/tlib_vim'
-  Plugin 'garbas/vim-snipmate'
-  Plugin 'honza/vim-snippets'
-  Plugin 'prabirshrestha/asyncomplete-ultisnips.vim'
-  Plugin 'SirVer/ultisnips'
-  Plugin 'jiangmiao/auto-pairs'
-  Plugin 'tsony-tsonev/nerdtree-git-plugin'
-  Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'liuchengxu/vim-which-key'
-  Plugin 'bling/vim-bufferline'
-  Plugin 'ctrlpvim/ctrlp.vim'
-  Plugin 'ryanoasis/vim-devicons'
-call vundle#end()
-filetype plugin on
+call plug#begin()
+  Plug 'tpope/vim-sensible'
+  Plug 'scrooloose/nerdtree'
+  Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'tpope/vim-fugitive'
+  Plug 'mileszs/ack.vim'
+  Plug 'will133/vim-dirdiff'
+  Plug 'udalov/kotlin-vim'
+  Plug 'nickspoons/vim-sharpenup'
+  Plug 'dense-analysis/ale'
+  Plug 'RRethy/vim-illuminate'
+  Plug 'inside/vim-search-pulse'
+  Plug 'OmniSharp/omnisharp-vim'
+  Plug 'tpope/vim-dispatch'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'tpope/vim-sensible'
+  Plug 'OrangeT/vim-csharp'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'tomasiser/vim-code-dark'
+  Plug 'Shougo/echodoc.vim'
+  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf'
+  Plug 'ddrscott/vim-side-search'
+  Plug 'vim-scripts/taglist.vim'
+  Plug 'tomtom/tlib_vim'
+  Plug 'honza/vim-snippets'
+  Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+  Plug 'SirVer/ultisnips'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'liuchengxu/vim-which-key'
+  Plug 'bling/vim-bufferline'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'mhinz/vim-startify'
+  Plug 'pprovost/vim-ps1'
+  Plug 'ycm-core/YouCompleteMe'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+filetype plugin indent on
 syntax on
 colorscheme codedark
 highlight csUserMethod ctermfg=85
