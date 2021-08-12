@@ -34,3 +34,8 @@ run:
 |Backward one word|Alt-B|
 |Delete to EOL|Ctrl-K|
 |Delete to BOL|Ctrl-U|
+
+
+## Windowing on Linux:
+
+https://support.system76.com/articles/pop-shell
