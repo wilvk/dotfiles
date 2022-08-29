@@ -18,6 +18,7 @@
 "   preferably the Hack Nerd font
 "   macos: clone the icons repo and run ./install.sh Hack. Select the Hack
 "   Nerd font in iterm
+"   Look here for brew install if still stuck: https://github.com/wilvk/dotfiles
 " dotnet - for dotnet development - https://dotnet.microsoft.com/download
 "
 " Reasoning:
