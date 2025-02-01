@@ -39,3 +39,16 @@ run:
 ## Windowing on Linux:
 
 https://support.system76.com/articles/pop-shell
+
+## install oh-my-zsh:
+
+``sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"``
+
+via: https://ohmyz.sh/#install
+
+## Oh-my-zsh plugins install:
+
+``sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"``
+
+via: https://github.com/ohmyzsh/ohmyzsh
+
