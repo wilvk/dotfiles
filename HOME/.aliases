@@ -14,7 +14,7 @@ alias vtmuxc='vim ~/.tmux.conf'
 # cd shortcuts
 
 alias cdso='cd ~/source'
-alias cdwill='cd ~/source/github/wilvk'
+alias cdwill='cd ~/source/wilvk'
 alias cddoc='cd ~/Documents'
 alias cddl='cd ~/Downloads'
 
@@ -23,3 +23,7 @@ alias cddl='cd ~/Downloads'
 alias tmuxplug='~/.tmux/plugins/tundle/scripts/install_plugins.sh'
 
 alias gs='git status'
+
+alias vghost='vim ~/.config/ghostty/config'
+
+

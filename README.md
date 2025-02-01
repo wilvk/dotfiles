@@ -52,3 +52,9 @@ via: https://ohmyz.sh/#install
 
 via: https://github.com/ohmyzsh/ohmyzsh
 
+## Oh-my-zsh autocomplete:
+
+``git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions``
+
+via: https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
+
